@@ -4,6 +4,7 @@
  */
 package Entities;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -15,4 +16,7 @@ public class Entity {
     public BufferedImage[][] animations;
     public String animationPath;
     public int direction;
+    public Rectangle hitbox;
+    public boolean collisionOn = false;
+    
 }

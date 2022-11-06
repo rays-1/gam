@@ -21,8 +21,8 @@ import static main.GameScreen.*;
 public class TileManager {
     GameScreen gs;
     public static BufferedImage[] terrainSprites;
-    public static Tile[] levelData;
-    int mapTileNum[][];
+    public Tile[] levelData;
+    public int mapTileNum[][];
     
     public TileManager(GameScreen gs){
         this.gs = gs;
