@@ -9,6 +9,7 @@ import static Utilities.constants.*;
 import static Utilities.directions.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,10 @@ public class Player extends Entity{
         
         screenx = GAME_WIDTH/2 - (TILES_SIZE/2);
         screeny = GAME_HEIGHT/2- (TILES_SIZE/2);
+        
+        hitbox = new Rectangle(13,3,32,52);
+        
+        
         loadSpriteAnim();
         init();
     }
@@ -54,23 +59,37 @@ public class Player extends Entity{
         if(ki.pressedW == true){
             moving = true;
             direction = UP;
-            terrainy -= speed;
         }
         else if(ki.pressedS == true){
             moving = true;
             direction = DOWN;
-            terrainy += speed;
         }
         else if(ki.pressedA == true){
             moving = true;
             direction = LEFT;
-            terrainx -= speed;
+            
         }
         else if(ki.pressedD == true){
             moving = true;
             direction = RIGHT;
-            terrainx += speed;
+
         }
+        
+        collisionOn = false;
+        gs.collisionh.checkTile(this);
+        
+        if(collisionOn == false){
+            if(direction == UP && moving){
+                terrainy -= speed;
+            }else if(direction == DOWN && moving){
+                terrainy += speed;
+            }else if(direction == LEFT && moving){
+                terrainx -= speed;
+            }else if(direction == RIGHT && moving){
+                terrainx += speed;
+            }
+        }
+        
         updateAnimation();
         setState();
     }
@@ -83,7 +102,6 @@ public class Player extends Entity{
         //thus making the width negative and adding the width to the xAxis THUS flipping the image
         //basically all of this code just flips the sprite based on what button was clicked
         //so left = faces the character to the left right = faces the character to the right
-        
         if(ki.pressedA){
             g2.drawImage(animations[currentani][aniIndex],xAxis+width,yAxis,-width,height,null);
             wasleft = true;

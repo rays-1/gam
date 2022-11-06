@@ -32,10 +32,11 @@ public class GameScreen extends JPanel implements Runnable{
     
     public final static int GAME_WIDTH = TILES_SIZE * TILES_WIDTH; //1260 SCREEN WIDTH
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_HEIGHT; //900 SCREEN HEIGHT
-    TileManager tilehandler = new TileManager(this);
+    public TileManager tilehandler = new TileManager(this);
     KeyboardInputs keylistener = new KeyboardInputs(this);
     MouseInputs mouselistener = new MouseInputs(this);
     Thread gameLoop;
+    public CollisionHandler collisionh = new CollisionHandler(this);
     public Player player = new Player(this,keylistener);
     
     //set player default pos
